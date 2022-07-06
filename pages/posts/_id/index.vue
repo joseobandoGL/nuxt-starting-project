@@ -3,8 +3,8 @@
     <section class="post">
       <h1>{{ loadedPost.title }}</h1>
       <div class="post-details">
-        <div>Last Updated on {{ loadedPost.updatedDate }}</div>
-        <div>Written by {{ loadedPost.author }}</div>
+        <div class="post-detail">Last Updated on {{ loadedPost.updatedDate }}</div>
+        <div class="post-detail">Written by {{ loadedPost.author }}</div>
       </div>
       <p>{{ loadedPost.content }}</p>
     </section>
@@ -16,22 +16,20 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
-  asyncData(context, callback) {
-    setTimeout(() => {
-      callback(null, {
-        loadedPost: {
-          id: "1",
-          title: `First Post (ID: ${context.params.id})`,
-          previewText: "This is our first post!",
-          thumbnail:
-            "https://associationsnow.com/wp-content/uploads/2016/01/0111_javascript.jpg",
-          author: 'JP Obando',
-          updatedDate: new Date(),
-          content: 'Some dummy text which is definitely not the preview text.'
+  asyncData(context) {
+    return axios.get(`${process.env.BASE_API_URL}/posts/${context.params.id}.json`)
+      .then(res => {
+        console.log('success call')
+        return {
+          loadedPost: res.data
         }
+      })
+      .catch(err => {
+        context.error(err);
       });
-    }, 1000);
   }
 }
 </script>

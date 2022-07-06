@@ -11,9 +11,11 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "axios": "^0.27.2",
     "nuxt": "^1.0.0"
   },
   "devDependencies": {
+    "@nuxtjs/dotenv": "^1.4.1",
     "cross-env": "^5.0.1"
   }
 }
