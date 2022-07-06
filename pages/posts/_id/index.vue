@@ -1,12 +1,12 @@
 <template>
   <div class="single-post-page">
     <section class="post">
-      <h1>Title of the Post</h1>
+      <h1>{{ loadedPost.title }}</h1>
       <div class="post-details">
-        <div>Last Updated on XXX</div>
-        <div>Written by Name</div>
+        <div>Last Updated on {{ loadedPost.updatedDate }}</div>
+        <div>Written by {{ loadedPost.author }}</div>
       </div>
-      <p>Content of the post</p>
+      <p>{{ loadedPost.content }}</p>
     </section>
     <section class="post-feedback">
       Let me know what you think about the post, send a mail to
@@ -14,6 +14,27 @@
     </section>
   </div>
 </template>
+
+<script>
+export default {
+  asyncData(context, callback) {
+    setTimeout(() => {
+      callback(null, {
+        loadedPost: {
+          id: "1",
+          title: `First Post (ID: ${context.params.id})`,
+          previewText: "This is our first post!",
+          thumbnail:
+            "https://associationsnow.com/wp-content/uploads/2016/01/0111_javascript.jpg",
+          author: 'JP Obando',
+          updatedDate: new Date(),
+          content: 'Some dummy text which is definitely not the preview text.'
+        }
+      });
+    }, 1000);
+  }
+}
+</script>
 
 <style scoped>
 .single-post-page {
