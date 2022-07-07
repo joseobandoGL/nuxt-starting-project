@@ -1,4 +1,5 @@
-const pkg = require('./package')
+require('dotenv').config();
+const pkg = require('./package');
 
 module.exports = {
   mode: 'universal',
@@ -7,11 +8,11 @@ module.exports = {
   ** Headers of the page
   */
   head: {
-    title: pkg.name,
+    title: 'JP Blog',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: pkg.description }
+      { hid: 'description', name: 'description', content: 'My cool Web Development Blog ' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
@@ -22,26 +23,35 @@ module.exports = {
   /*
   ** Customize the progress-bar color
   */
-  loading: { color: '#3B8070' },
+  loading: { color: '#450001' },
 
   /*
   ** Global CSS
   */
   css: [
+    '~assets/styles/main.css'
   ],
 
   /*
   ** Plugins to load before mounting the App
   */
   plugins: [
+    '~plugins/core-components.js',
+    '~plugins/date-filter.js'
   ],
 
   /*
   ** Nuxt.js modules
   */
   modules: [
-    '@nuxtjs/dotenv'
+    '@nuxtjs/dotenv',
+    '@nuxtjs/axios'
   ],
+
+  axios: {
+    baseURL: process.env.BASE_API_URL,
+    credentials: false
+  },
 
   /*
   ** Build configuration
@@ -53,5 +63,9 @@ module.exports = {
     extend(config, ctx) {
       
     }
+  },
+  transition: {
+    name: 'fade',
+    mode: 'out-in'
   }
 }

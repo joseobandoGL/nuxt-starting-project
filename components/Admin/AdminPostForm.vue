@@ -26,19 +26,12 @@
 
 
 <script>
-import AppControlInput from '@/components/UI-Components/AppControlInput';
-import AppButton from '@/components/UI-Components/AppButton';
-
 export default {
   props: {
     post: {
       type: Object,
       required: false
     }
-  },
-  components: {
-    AppButton,
-    AppControlInput,
   },
   data() {
     return {
