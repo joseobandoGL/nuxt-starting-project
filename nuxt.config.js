@@ -67,5 +67,13 @@ module.exports = {
   transition: {
     name: 'fade',
     mode: 'out-in'
+  },
+  router: {
+    middleware: 'log'
+  },
+  env: {
+    fbAPIKey: process.env.AUTH_API_KEY,
+    signUpURL: process.env.SIGN_UP_URL,
+    logInURL: process.env.LOG_IN_URL
   }
 }

@@ -14,11 +14,12 @@ export default {
     AdminPostForm
   },
   layout: 'admin',
+  middleware: ['check-auth', 'auth'],
   asyncData (context) {
     return context.app.$axios.$get(`/posts/${context.params.postId}.json`)
-      .then(res => {
+      .then(data => {
         return {
-          loadedPost: { ...res.data, id: context.params.postId }
+          loadedPost: { ...data, id: context.params.postId }
         }
       })
       .catch(err => {
