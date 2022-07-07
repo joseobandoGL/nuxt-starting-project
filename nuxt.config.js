@@ -1,5 +1,6 @@
 require('dotenv').config();
 const pkg = require('./package');
+const bodyParser = require('body-parser');
 
 module.exports = {
   mode: 'universal',
@@ -68,12 +69,18 @@ module.exports = {
     name: 'fade',
     mode: 'out-in'
   },
-  router: {
-    middleware: 'log'
-  },
+  // router: {
+  //   middleware: 'log'
+  // },
   env: {
     fbAPIKey: process.env.AUTH_API_KEY,
     signUpURL: process.env.SIGN_UP_URL,
     logInURL: process.env.LOG_IN_URL
-  }
+  },
+
+  // server middleware
+  serverMiddleware: [
+    bodyParser.json(),
+    '~/api'
+  ],
 }
